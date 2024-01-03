@@ -1,0 +1,37 @@
+---
+title: "Blast"
+output: html_document
+date: "2023-11-28"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## comparing top marker genes in oysters and geoduck samples
+
+read in data
+```{r}
+
+geoduck <- read.delim("../data/geoduck_topmarkers_annot.txt")
+head(geoduck)
+
+oyster <- read.csv("../data/CPbla_topmarkers_annot.csv")
+head(oyster)
+```
+
+ merge by common genes
+
+```{r}
+
+compare <- merge(x = oyster, y = geoduck, by.x = "gene_id", by.y = "LOC")
+head(compare)
+
+```
+
+write to file
+```{r}
+
+write.csv(compare, "../output/top_marker_oyster_geoduck_common.csv")
+```
+
